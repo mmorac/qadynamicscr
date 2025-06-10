@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+
+a{
+  color: rgb(237, 237, 237);
+}
+
+/* Navbar custom styles */
+.custom-navbar {
+  background-color: rgb(48, 148, 132) !important;
+}
+.custom-navbar .navbar-brand {
+  color: rgb(237, 237, 237) !important;
+}
+.custom-navbar .nav-link, .custom-navbar {
+  color: rgb(237, 237, 237) !important;
+}
+
+.dropdown-item{
+  color: rgb(48, 148, 132) !important;
+}
+
+.custom-navbar .nav-link.active {
+  text-decoration: underline;
+}
+
+.informative{
+  color: rgb(48, 148, 132) !important;
+  max-width: 60vw;
+  margin: 0 auto;
+  text-align: justify;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo{
+  background-color: rgb(237, 237, 237);
+  border-radius: 50%;
+  height: 5vh;
+}
