@@ -67,19 +67,21 @@ const Home: React.FC = () => {
     const availableHours = selectedDate ? getAvailableHours(selectedDate) : [];
 
     return (
-        <div className='informative'>
-            <Calendar onDateSelect={setSelectedDate} />
-            <div>
+        <div className='informative' style={{ display: 'flex', alignItems: 'flex-start', gap: 32 }}>
+            <div style={{ minWidth: 900 }}>
+                <Calendar onDateSelect={setSelectedDate} />
+            </div>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <h4>
                     {selectedDate
                         ? `Available Hours for ${selectedDate.toLocaleDateString()}`
                         : 'Select a date to see available hours'}
                 </h4>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8, width: 900 }}>
                     {availableHours.map((hour) => (
                         <button
                             key={hour}
-                            style={{ padding: '8px 12px', borderRadius: 4, border: '1px solid #007bff', background: '#e7f1ff', color: '#007bff', cursor: 'pointer' }}
+                            style={{ padding: '8px 12px', borderRadius: 4, border: '1px solid rgb(48, 148, 132)', background: '#e7f8f5', color: 'rgb(48, 148, 132)', cursor: 'pointer' }}
                             onClick={() => alert(`Booked ${hour} on ${selectedDate?.toLocaleDateString()}`)}
                         >
                             Book {hour}
