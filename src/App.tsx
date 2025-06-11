@@ -23,7 +23,7 @@ function App() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
-                  <button className="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ background: 'none', border: 'none', padding: 0 }}>
+                  <button className="nav-link dropdown-toggle dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ background: 'none', border: 'none', padding: 0 }}>
                     About Us
                   </button>
                   <ul className="dropdown-menu">
@@ -32,7 +32,7 @@ function App() {
                   </ul>
                 </li>
                 <li className="nav-item dropdown">
-                  <button className="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ background: 'none', border: 'none', padding: 0 }}>
+                  <button className="nav-link dropdown-toggle dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ background: 'none', border: 'none', padding: 0 }}>
                     Services
                   </button>
                   <ul className="dropdown-menu">

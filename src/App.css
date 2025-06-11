@@ -76,3 +76,7 @@ a{
   border-radius: 50%;
   height: 5vh;
 }
+
+.dropdown-button{
+  width: 15vh;
+}
