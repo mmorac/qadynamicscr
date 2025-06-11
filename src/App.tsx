@@ -23,18 +23,18 @@ function App() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button className="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ background: 'none', border: 'none', padding: 0 }}>
                     About Us
-                  </a>
+                  </button>
                   <ul className="dropdown-menu">
                     <li><Link className="dropdown-item" to="/mvv">Mission, Vision & Values</Link></li>
                     <li><Link className="dropdown-item" to="/expertise">Expertise</Link></li>
                   </ul>
                 </li>
                 <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button className="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ background: 'none', border: 'none', padding: 0 }}>
                     Services
-                  </a>
+                  </button>
                   <ul className="dropdown-menu">
                     <li><Link className="dropdown-item" to="/consultancy">Sterilization Consultancy</Link></li>
                     <li><Link className="dropdown-item" to="/training">Sterilization Training</Link></li>
