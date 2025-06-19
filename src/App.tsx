@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import Home from './presentation/home/home';
@@ -7,8 +7,22 @@ import Training from './presentation/services/training';
 import QMS from './presentation/services/qms';
 import MVV from './presentation/aboutus/mvv';
 import Expertise from './presentation/aboutus/expertise';
+import { getAccessToken } from './calendar_access/authService';
+
 
 function App() {
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const token = await getAccessToken();
+        sessionStorage.setItem('accessToken', token || '');
+      } catch (error) {
+        console.error('Error fetching access token:', error);
+      }
+    };
+    fetchToken();
+  }, []);
+
   return (
     <Router>
       <div className="App">
