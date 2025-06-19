@@ -1,9 +1,6 @@
 import axios from 'axios';
 
 export async function getAccessToken(): Promise<string> {
-  const clientId: string = process.env.REACT_APP_CLIENT_ID || '';
-  const clientSecret: string = process.env.REACT_APP_CLIENT_SECRET || '';
-  const tenantId: string = process.env.REACT_APP_TENANT_ID || '';
   try {
     const url = `https://qadynamicscrapi-g3degpcrf8ffbbas.canadacentral-01.azurewebsites.net/api/v1/azure/token`;
     const response = await axios.get(url);

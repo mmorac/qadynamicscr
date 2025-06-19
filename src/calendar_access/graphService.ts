@@ -1,6 +1,5 @@
 import { Client } from '@microsoft/microsoft-graph-client';
-import { Event, ScheduleInformation, DateTimeTimeZone } from '@microsoft/microsoft-graph-types';
-import { getAccessToken } from './authService';
+import { Event, DateTimeTimeZone } from '@microsoft/microsoft-graph-types';
 import axios from 'axios';
 
 // Interfaces para crear eventos
@@ -16,14 +15,6 @@ interface EventResponse {
   subject?: string;
   start: { dateTime?: string; timeZone: string };
   end: { dateTime?: string; timeZone: string };
-}
-
-// Interfaz personalizada para la solicitud de getSchedule
-interface ScheduleRequest {
-  schedules: string[];
-  startTime: DateTimeTimeZone;
-  endTime: DateTimeTimeZone;
-  availabilityViewInterval: number;
 }
 
 export async function createCalendarEvent(
