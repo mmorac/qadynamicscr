@@ -1,5 +1,5 @@
 import { Client } from '@microsoft/microsoft-graph-client';
-import { Event, DateTimeTimeZone } from '@microsoft/microsoft-graph-types';
+import { Event } from '@microsoft/microsoft-graph-types';
 import axios from 'axios';
 
 // Interfaces para crear eventos
