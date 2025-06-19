@@ -77,7 +77,6 @@ const Home: React.FC = () => {
       setLoadingHours(true);
       setError(null);
       try {
-        const userId = 'alonso.angulo@qadynamicscr.com'; // Reemplaza con el correo del calendario
         const hours = await getAvailableHours(selectedDate); // Ajusta la zona horaria
         setAvailableHours(hours);
       } catch (err) {
