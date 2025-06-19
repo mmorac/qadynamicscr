@@ -69,9 +69,7 @@ export async function createCalendarEvent(
 }
 
 export async function getAvailableHours(
-  userId: string,
   date: Date,
-  timeZone: string = 'UTC',
 ): Promise<string[]> {
   try {
     const accessToken = sessionStorage.getItem('accessToken');

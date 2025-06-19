@@ -1,6 +1,7 @@
 import {EventRequest} from '../../calendar_access/iEventRequest';
 import React, { useState, useEffect } from 'react';
 import { createCalendarEvent, getAvailableHours } from '../../calendar_access/graphService';
+import './home.css';
 
 // Componente Calendar
 const Calendar: React.FC<{ onDateSelect: (date: Date) => void }> = ({ onDateSelect }) => {
@@ -30,7 +31,7 @@ const Calendar: React.FC<{ onDateSelect: (date: Date) => void }> = ({ onDateSele
   };
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: 16, borderRadius: 8, marginBottom: 24 }}>
+    <div className='calendar'>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
         <button onClick={handlePrevMonth}>&lt;</button>
         <h3 style={{ margin: 0 }}>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
@@ -77,7 +78,7 @@ const Home: React.FC = () => {
       setError(null);
       try {
         const userId = 'alonso.angulo@qadynamicscr.com'; // Reemplaza con el correo del calendario
-        const hours = await getAvailableHours(userId, selectedDate, 'America/Guatemala'); // Ajusta la zona horaria
+        const hours = await getAvailableHours(selectedDate); // Ajusta la zona horaria
         setAvailableHours(hours);
       } catch (err) {
         setError('No se pudieron cargar las horas disponibles');
@@ -122,7 +123,7 @@ const Home: React.FC = () => {
       setBookingStatus(`Cita creada: ${response.subject} a las ${hour} (ID: ${response.id})`);
       setError(null);
       // Actualizar horas disponibles después de crear la cita
-      const updatedHours = await getAvailableHours(userId, selectedDate, 'America/Guatemala');
+      const updatedHours = await getAvailableHours(selectedDate);
       setAvailableHours(updatedHours);
     } catch (err) {
       setError('No se pudo crear la cita');
@@ -132,8 +133,8 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="informative" style={{ width: '900px', borderStyle: 'solid' }}>
-      <div className="calendar-container" style={{ width: '900px' }}>
+    <div className="informative" style={{ width: '100%'}}>
+      <div className="calendar-container">
         <Calendar onDateSelect={setSelectedDate} />
       </div>
       <div className="available-hours">
