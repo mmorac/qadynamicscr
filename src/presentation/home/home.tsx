@@ -32,20 +32,20 @@ const Calendar: React.FC<{ onDateSelect: (date: Date) => void }> = ({ onDateSele
 
   return (
     <div className='calendar'>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+      <div className="calendar-header">
         <button onClick={handlePrevMonth}>&lt;</button>
-        <h3 style={{ margin: 0 }}>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
+        <h3 className="calendar-title">{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
         <button onClick={handleNextMonth}>&gt;</button>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2, textAlign: 'center' }}>
+      <div className="calendar-grid">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-          <div key={d} style={{ fontWeight: 'bold', padding: 2 }}>{d}</div>
+          <div key={d} className="calendar-day-header">{d}</div>
         ))}
         {days.map((day, idx) =>
           day ? (
             <button
               key={idx}
-              style={{ padding: 8, background: '#f9f9f9', border: '1px solid #eee', borderRadius: 4, cursor: 'pointer' }}
+              className="calendar-day-btn"
               onClick={() => onDateSelect(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day))}
             >
               {day}
@@ -90,46 +90,13 @@ const Home: React.FC = () => {
     fetchAvailableHours();
   }, [selectedDate]);
 
-  const handleBookHour = async (hour: string) => {
-    if (!selectedDate) return;
-
-    // Formatear la fecha y hora para Microsoft Graph
-    const [hourPart] = hour.split(':');
-    const startDateTime = new Date(selectedDate);
-    startDateTime.setHours(parseInt(hourPart), 0, 0, 0);
-    const endDateTime = new Date(startDateTime);
-    endDateTime.setHours(startDateTime.getHours() + 1); // Cita de 1 hora
-
-    const event: EventRequest = {
-      subject: 'Cita programada',
-      start: {
-        dateTime: startDateTime.toISOString(),
-        timeZone: 'America/Guatemala', // Ajusta según tu zona horaria
-      },
-      end: {
-        dateTime: endDateTime.toISOString(),
-        timeZone: 'America/Guatemala',
-      },
-      body: {
-        content: `Cita reservada para el ${selectedDate.toLocaleDateString()} a las ${hour}`,
-        contentType: 'text',
-      },
-    };
-
-    try {
-      const userId = 'alonso.angulo@qadynamicscr.com'; // Reemplaza con el correo del calendario
-      const response = await createCalendarEvent(userId, event);
-      setBookingStatus(`Cita creada: ${response.subject} a las ${hour} (ID: ${response.id})`);
-      setError(null);
-      // Actualizar horas disponibles después de crear la cita
-      const updatedHours = await getAvailableHours(selectedDate);
-      setAvailableHours(updatedHours);
-    } catch (err) {
-      setError('No se pudo crear la cita');
-      setBookingStatus(null);
-      console.error('Error:', err);
-    }
-  };
+  // Manejar la reserva de una hora
+  const handleBookHour = async (date: Date, hour: string) => {
+    sessionStorage.setItem('selectedDate', date.toISOString());
+    sessionStorage.setItem('selectedHour', hour);
+    window.history.pushState({}, '', '/book');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  }
 
   return (
     <div className="informative" style={{ width: '100%'}}>
@@ -146,27 +113,12 @@ const Home: React.FC = () => {
         {!loadingHours && availableHours.length === 0 && selectedDate && !error && (
           <p>No hay horas disponibles para esta fecha.</p>
         )}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
-            gap: 8,
-            width: '100%',
-          }}
-        >
+        <div className="available-hours-grid">
           {availableHours.map(hour => (
             <button
               key={hour}
-              style={{
-                padding: '8px 12px',
-                borderRadius: 4,
-                border: '1px solid rgb(48, 148, 132)',
-                background: '#e7f8f5',
-                color: 'rgb(48, 148, 132)',
-                cursor: 'pointer',
-                width: '100%',
-              }}
-              onClick={() => handleBookHour(hour)}
+              className="available-hour-btn"
+              onClick={() => selectedDate && handleBookHour(selectedDate, hour)}
             >
               Reservar {hour}
             </button>

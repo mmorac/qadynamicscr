@@ -8,6 +8,7 @@ import QMS from './presentation/services/qms';
 import MVV from './presentation/aboutus/mvv';
 import Expertise from './presentation/aboutus/expertise';
 import { getAccessToken } from './calendar_access/authService';
+import Booking from './presentation/booking/book';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
           <Route path="/qms" element={<QMS />} />
           <Route path="/mvv" element={<MVV />} />
           <Route path="/expertise" element={<Expertise />} />
+          <Route path="/book" element={<Booking />} />
         </Routes>
       </div>
     </Router>

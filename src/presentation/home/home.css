@@ -1,7 +1,56 @@
-.calendar{
-    border: '1px solid #ccc';
-    padding: 16; 
-    border-radius: 8;
-    margin-bottom: 24;
+/* Calendar container */
+.calendar {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.calendar-title {
+    margin: 0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    text-align: center;
+}
+
+.calendar-day-header {
+    font-weight: bold;
+    padding: 2px;
+}
+
+.calendar-day-btn {
+    padding: 8px;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.available-hours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    width: 100%;
+}
+
+.available-hour-btn {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid rgb(48, 148, 132);
+    background: #e7f8f5;
+    color: rgb(48, 148, 132);
+    cursor: pointer;
     width: 100%;
 }

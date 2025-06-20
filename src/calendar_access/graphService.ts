@@ -124,3 +124,55 @@ export async function getAvailableHours(
     throw error;
   }
 }
+
+export async function bookTime(email:string) {
+  try{
+    const selectedDate = sessionStorage.getItem('selectedDate');
+    const selectedHour = sessionStorage.getItem('selectedHour');
+    const selectedEndTime = sessionStorage.getItem('selectedEndTime');
+    let startDateTime = '';
+    let endDateTime = '';
+
+    if (selectedDate && selectedHour) {
+      // Combine date and hour to create a Date object
+      const [hour, minute = '00'] = selectedHour.split(':');
+      const date = new Date(selectedDate);
+      date.setHours(Number(hour), Number(minute), 0, 0);
+      startDateTime = date.toISOString();
+
+      // Assume 1 hour duration for the booking
+      const endDate = new Date(date);
+      endDate.setHours(endDate.getHours() + 1);
+      endDateTime = endDate.toISOString();
+
+      sessionStorage.setItem('selectedHour', startDateTime);
+      sessionStorage.setItem('selectedEndTime', endDateTime);
+    } else if (selectedDate && selectedHour && selectedEndTime) {
+      startDateTime = selectedHour;
+      endDateTime = selectedEndTime;
+    } else {
+      throw new Error('selectedDate or selectedHour is missing in sessionStorage');
+    }
+    const url = `https://qadynamicscrapi-g3degpcrf8ffbbas.canadacentral-01.azurewebsites.net/api/v1/calendar/book`;
+    const requestBody = {
+      Token: sessionStorage.getItem('accessToken'),
+      StartTime: sessionStorage.getItem('selectedHour') || '',
+      EndTime: sessionStorage.getItem('selectedEndTime') || '',
+      Email: email,
+    };
+    let response = await axios.post(url, requestBody, {
+      headers: {
+      'Content-Type': 'application/json',
+      },
+    });
+    if (response.status === 200) {
+      alert(`Booking confirmed for ${email}`);
+    } else {
+      throw new Error('Error reservando la hora');
+    }
+  }
+  catch (error) {
+    console.error('Error al reservar hora:', error);
+    throw error;
+  }
+}
