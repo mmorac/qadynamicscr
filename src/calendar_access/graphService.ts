@@ -130,30 +130,54 @@ export async function bookTime(email:string) {
     const selectedDate = sessionStorage.getItem('selectedDate');
     const selectedHour = sessionStorage.getItem('selectedHour');
     const selectedEndTime = sessionStorage.getItem('selectedEndTime');
-        
+
     // selectedHour and selectedEndTime are originally in the format "HH:MM"
     // Consequently, we need to convert them to a Date object and then to a string to store in sessionStorage.
 
-    const startTime = selectedHour ? `${selectedDate?.split('T')[0]}T${selectedHour.split(':')[0]}:${selectedHour.split(':')[1]}.000` : '';
-    const endTime = selectedEndTime ? `${selectedDate?.split('T')[0]}T${selectedEndTime.split(':')[0]}:${selectedEndTime.split(':')[1]}.000` : '';
+    const startTime = selectedHour ? `${selectedDate?.split('T')[0]}T${selectedHour.split(':')[0]}:${selectedHour.split(':')[1]}:00.000` : '';
+    const endTime = selectedEndTime ? `${selectedDate?.split('T')[0]}T${selectedEndTime.split(':')[0]}:${selectedEndTime.split(':')[1]}:00.000` : '';
 
     sessionStorage.setItem('selectedHour', startTime);
     sessionStorage.setItem('selectedEndTime', endTime);
 
     // Send the booking request to our API
 
-    const url = `https://qadynamicscrapi-g3degpcrf8ffbbas.canadacentral-01.azurewebsites.net/api/v1/calendar/book`;
+    //const url = `https://qadynamicscrapi-g3degpcrf8ffbbas.canadacentral-01.azurewebsites.net/api/v1/calendar/book`;
+    const url = `https://localhost:7205/api/v1/calendar/book`;
     const requestBody = {
       Token: sessionStorage.getItem('accessToken'),
       StartTime: sessionStorage.getItem('selectedHour') || '',
       EndTime: sessionStorage.getItem('selectedEndTime') || '',
       Email: email,
     };
-    let response = await axios.post(url, requestBody, {
+    // Show loader
+    const loader = document.createElement('div');
+    loader.id = 'booking-loader';
+    loader.style.position = 'fixed';
+    loader.style.top = '0';
+    loader.style.left = '0';
+    loader.style.width = '100vw';
+    loader.style.height = '100vh';
+    loader.style.background = 'rgba(0,0,0,0.3)';
+    loader.style.display = 'flex';
+    loader.style.alignItems = 'center';
+    loader.style.justifyContent = 'center';
+    loader.style.zIndex = '9999';
+    loader.innerHTML = `<div style="background: white; padding: 2rem 3rem; border-radius: 8px; font-size: 1.2rem;">Sending the booking request</div>`;
+    document.body.appendChild(loader);
+
+    let response;
+    try {
+      response = await axios.post(url, requestBody, {
       headers: {
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       },
-    });
+      });
+    } finally {
+      // Remove loader
+      const loaderElem = document.getElementById('booking-loader');
+      if (loaderElem) loaderElem.remove();
+    }
     if (response.status === 200) {
       alert(`Booking confirmed for ${email}`);
     } else {
