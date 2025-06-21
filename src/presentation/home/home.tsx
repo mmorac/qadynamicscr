@@ -85,13 +85,33 @@ const Home: React.FC = () => {
         setLoadingHours(false);
       }
     };
-
+    
     fetchAvailableHours();
   }, [selectedDate]);
 
+    const adjustDate = (isoString: string) => {
+      const date = new Date(isoString);
+      const offsetMs = date.getTimezoneOffset() * 60000;
+      const localDate = new Date(date.getTime() - offsetMs);
+      // Format as "YYYY-MM-DDTHH:mm:ss.SSS"
+/*
+      const pad = (n: number) => n.toString().padStart(2, '0');
+      const year = localDate.getFullYear();
+      const month = pad(localDate.getMonth() + 1);
+      const day = pad(localDate.getDate());
+      const hour = pad(localDate.getHours());
+      const min = pad(localDate.getMinutes());
+      const sec = pad(localDate.getSeconds());
+      const ms = localDate.getMilliseconds().toString().padStart(3, '0');
+      return `${year}-${month}-${day}T${hour}:${min}:${sec}.${ms}`;
+*/
+      return localDate.toISOString();
+    }
+
   // Manejar la reserva de una hora
   const handleBookHour = async (date: Date, hour: string) => {
-    sessionStorage.setItem('selectedDate', date.toISOString());
+    let selectedDate = adjustDate(date.toISOString());
+    sessionStorage.setItem('selectedDate', selectedDate);
     sessionStorage.setItem('selectedHour', hour);
     window.history.pushState({}, '', '/book');
     window.dispatchEvent(new PopStateEvent('popstate'));

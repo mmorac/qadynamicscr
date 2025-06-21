@@ -130,29 +130,18 @@ export async function bookTime(email:string) {
     const selectedDate = sessionStorage.getItem('selectedDate');
     const selectedHour = sessionStorage.getItem('selectedHour');
     const selectedEndTime = sessionStorage.getItem('selectedEndTime');
-    let startDateTime = '';
-    let endDateTime = '';
+        
+    // selectedHour and selectedEndTime are originally in the format "HH:MM"
+    // Consequently, we need to convert them to a Date object and then to a string to store in sessionStorage.
 
-    if (selectedDate && selectedHour) {
-      // Combine date and hour to create a Date object
-      const [hour, minute = '00'] = selectedHour.split(':');
-      const date = new Date(selectedDate);
-      date.setHours(Number(hour), Number(minute), 0, 0);
-      startDateTime = date.toISOString();
+    const startTime = selectedHour ? `${selectedDate?.split('T')[0]}T${selectedHour.split(':')[0]}:${selectedHour.split(':')[1]}.000` : '';
+    const endTime = selectedEndTime ? `${selectedDate?.split('T')[0]}T${selectedEndTime.split(':')[0]}:${selectedEndTime.split(':')[1]}.000` : '';
 
-      // Assume 1 hour duration for the booking
-      const endDate = new Date(date);
-      endDate.setHours(endDate.getHours() + 1);
-      endDateTime = endDate.toISOString();
+    sessionStorage.setItem('selectedHour', startTime);
+    sessionStorage.setItem('selectedEndTime', endTime);
 
-      sessionStorage.setItem('selectedHour', startDateTime);
-      sessionStorage.setItem('selectedEndTime', endDateTime);
-    } else if (selectedDate && selectedHour && selectedEndTime) {
-      startDateTime = selectedHour;
-      endDateTime = selectedEndTime;
-    } else {
-      throw new Error('selectedDate or selectedHour is missing in sessionStorage');
-    }
+    // Send the booking request to our API
+
     const url = `https://qadynamicscrapi-g3degpcrf8ffbbas.canadacentral-01.azurewebsites.net/api/v1/calendar/book`;
     const requestBody = {
       Token: sessionStorage.getItem('accessToken'),

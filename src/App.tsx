@@ -12,17 +12,30 @@ import Booking from './presentation/booking/book';
 
 
 function App() {
+  const [loadingToken, setLoadingToken] = React.useState(true);
   useEffect(() => {
     const fetchToken = async () => {
       try {
+        setLoadingToken(true);
         const token = await getAccessToken();
         sessionStorage.setItem('accessToken', token || '');
       } catch (error) {
         console.error('Error fetching access token:', error);
+      } finally {
+        setLoadingToken(false);
       }
     };
     fetchToken();
   }, []);
+
+  if (loadingToken) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <Router>
