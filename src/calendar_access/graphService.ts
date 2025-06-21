@@ -142,8 +142,8 @@ export async function bookTime(email:string) {
 
     // Send the booking request to our API
 
-    //const url = `https://qadynamicscrapi-g3degpcrf8ffbbas.canadacentral-01.azurewebsites.net/api/v1/calendar/book`;
-    const url = `https://localhost:7205/api/v1/calendar/book`;
+    const url = `https://qadynamicscrapi-g3degpcrf8ffbbas.canadacentral-01.azurewebsites.net/api/v1/calendar/book`;
+    //const url = `https://localhost:7205/api/v1/calendar/book`;
     const requestBody = {
       Token: sessionStorage.getItem('accessToken'),
       StartTime: sessionStorage.getItem('selectedHour') || '',
