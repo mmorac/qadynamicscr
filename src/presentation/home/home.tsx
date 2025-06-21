@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getAvailableHours } from '../../calendar_access/graphService';
 import './home.css';
 
-// Componente Calendar
+// Calendar Component
 const Calendar: React.FC<{ onDateSelect: (date: Date) => void }> = ({ onDateSelect }) => {
   const [currentMonth, setCurrentMonth] = useState(() => {
     const now = new Date();
@@ -37,7 +37,7 @@ const Calendar: React.FC<{ onDateSelect: (date: Date) => void }> = ({ onDateSele
         <button onClick={handleNextMonth}>&gt;</button>
       </div>
       <div className="calendar-grid">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
+        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(d => (
           <div key={d} className="calendar-day-header">{d}</div>
         ))}
         {days.map((day, idx) =>
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loadingHours, setLoadingHours] = useState<boolean>(false);
 
-  // Cargar horas disponibles cuando cambia la fecha
+  // Load available hours when the date changes
   useEffect(() => {
     if (!selectedDate) {
       setAvailableHours([]);
@@ -76,10 +76,10 @@ const Home: React.FC = () => {
       setLoadingHours(true);
       setError(null);
       try {
-        const hours = await getAvailableHours(selectedDate); // Ajusta la zona horaria
+        const hours = await getAvailableHours(selectedDate); // Adjust timezone
         setAvailableHours(hours);
       } catch (err) {
-        setError('No se pudieron cargar las horas disponibles');
+        setError('Could not load available hours');
         setAvailableHours([]);
       } finally {
         setLoadingHours(false);
@@ -89,14 +89,14 @@ const Home: React.FC = () => {
     fetchAvailableHours();
   }, [selectedDate]);
 
-    const adjustDate = (isoString: string) => {
-      const date = new Date(isoString);
-      const offsetMs = date.getTimezoneOffset() * 60000;
-      const localDate = new Date(date.getTime() - offsetMs);
-      return localDate.toISOString();
-    }
+  const adjustDate = (isoString: string) => {
+    const date = new Date(isoString);
+    const offsetMs = date.getTimezoneOffset() * 60000;
+    const localDate = new Date(date.getTime() - offsetMs);
+    return localDate.toISOString();
+  }
 
-  // Manejar la reserva de una hora
+  // Handle booking an hour
   const handleBookHour = async (date: Date, hour: string) => {
     let selectedDate = adjustDate(date.toISOString());
     sessionStorage.setItem('selectedDate', selectedDate);
@@ -116,12 +116,12 @@ const Home: React.FC = () => {
       <div className="available-hours">
         <h4>
           {selectedDate
-            ? `Horas disponibles para ${selectedDate.toLocaleDateString()}`
-            : 'Selecciona una fecha para ver las horas disponibles'}
+            ? `Available hours for ${selectedDate.toLocaleDateString()}`
+            : 'Select a date to see available hours'}
         </h4>
-        {loadingHours && <p>Cargando horas...</p>}
+        {loadingHours && <p>Loading hours...</p>}
         {!loadingHours && availableHours.length === 0 && selectedDate && !error && (
-          <p>No hay horas disponibles para esta fecha.</p>
+          <p>No available hours for this date.</p>
         )}
         <div className="available-hours-grid">
           {availableHours.map(hour => (
@@ -130,7 +130,7 @@ const Home: React.FC = () => {
               className="available-hour-btn"
               onClick={() => selectedDate && handleBookHour(selectedDate, hour)}
             >
-              Reservar {hour}
+              Book {hour}
             </button>
           ))}
         </div>

@@ -54,13 +54,12 @@ const Booking: React.FC = () => {
                 <button
                     className="booking-button"
                     onClick={() => {
-                        // Here you would typically handle the booking logic, e.g., sending the data to a server
                         bookTime(sessionStorage.getItem('email') || '')
                     }}
                 >
                     Confirm Booking
                 </button>
-                </div>
+            </div>
         </div>
     );
 };
