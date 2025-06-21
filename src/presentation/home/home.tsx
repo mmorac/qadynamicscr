@@ -1,6 +1,5 @@
-import {EventRequest} from '../../calendar_access/iEventRequest';
 import React, { useState, useEffect } from 'react';
-import { createCalendarEvent, getAvailableHours } from '../../calendar_access/graphService';
+import { getAvailableHours } from '../../calendar_access/graphService';
 import './home.css';
 
 // Componente Calendar
@@ -62,7 +61,7 @@ const Calendar: React.FC<{ onDateSelect: (date: Date) => void }> = ({ onDateSele
 const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [availableHours, setAvailableHours] = useState<string[]>([]);
-  const [bookingStatus, setBookingStatus] = useState<string | null>(null);
+  const [bookingStatus ] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loadingHours, setLoadingHours] = useState<boolean>(false);
 
