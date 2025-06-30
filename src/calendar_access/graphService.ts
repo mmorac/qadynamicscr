@@ -125,14 +125,15 @@ export async function getAvailableHours(
   }
 }
 
-export async function bookTime(email:string) {
+export async function bookTime(email:string, lastName: string, firstName: string, 
+  idNumber: string, telephoneNumber: string, company: string, position: string): Promise<void> {
   try{
     const selectedDate = sessionStorage.getItem('selectedDate');
     const selectedHour = sessionStorage.getItem('selectedHour');
     const selectedEndTime = sessionStorage.getItem('selectedEndTime');
 
-    // selectedHour and selectedEndTime are originally in the format "HH:MM"
-    // Consequently, we need to convert them to a Date object and then to a string to store in sessionStorage.
+    // // selectedHour and selectedEndTime are originally in the format "HH:MM"
+    // // Consequently, we need to convert them to a Date object and then to a string to store in sessionStorage.
 
     const startTime = selectedHour ? `${selectedDate?.split('T')[0]}T${selectedHour.split(':')[0]}:${selectedHour.split(':')[1]}:00.000` : '';
     const endTime = selectedEndTime ? `${selectedDate?.split('T')[0]}T${selectedEndTime.split(':')[0]}:${selectedEndTime.split(':')[1]}:00.000` : '';
@@ -142,13 +143,19 @@ export async function bookTime(email:string) {
 
     // Send the booking request to our API
 
-    const url = `https://qadynamicscrapi-g3degpcrf8ffbbas.canadacentral-01.azurewebsites.net/api/v1/calendar/book`;
-    //const url = `https://localhost:7205/api/v1/calendar/book`;
-    const requestBody = {
+    //const url = `https://qadynamicscrapi-g3degpcrf8ffbbas.canadacentral-01.azurewebsites.net/api/v1/calendar/book`;
+    const url = `https://localhost:7205/api/v1/calendar/book`;
+    const requestBody = { 
       Token: sessionStorage.getItem('accessToken'),
       StartTime: sessionStorage.getItem('selectedHour') || '',
       EndTime: sessionStorage.getItem('selectedEndTime') || '',
       Email: email,
+      Apellidos: lastName,
+      Nombre: firstName,
+      Cedula: idNumber,
+      Telefono: telephoneNumber,
+      Empresa: company,
+      Puesto: position,
     };
     // Show loader
     const loader = document.createElement('div');

@@ -31,8 +31,14 @@ function App() {
   if (loadingToken) {
     return (
       <div className="loader-container">
-        <div className="loader"></div>
-        <p>Loading...</p>
+        <div className="loader">
+          <img
+        src="/img/logo_inicio.png"
+        alt="Loading"
+        className="loader-image"
+          />
+        </div>
+        <p className="loader-text">Loading...</p>
       </div>
     );
   }
