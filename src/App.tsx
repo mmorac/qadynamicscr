@@ -9,6 +9,8 @@ import MVV from './presentation/aboutus/mvv';
 import Expertise from './presentation/aboutus/expertise';
 import { getAccessToken } from './calendar_access/authService';
 import Booking from './presentation/booking/book';
+import BookIntro from './presentation/booking/BookIntro'; // Import the BookIntro component
+import BookHourly from './presentation/booking/BookHourly';
 
 
 function App() {
@@ -70,6 +72,16 @@ function App() {
                   </ul>
                 </li>
                 {/* Add more nav items here if needed */}
+                <li className="nav-item dropdown">
+                  <button className="nav-link dropdown-toggle dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ background: 'none', border: 'none', padding: 0 }}>
+                    Bookings & Contact
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li><Link className="dropdown-item" to="/book-hourly">Book a session</Link></li>
+                    <li><Link className="dropdown-item" to="/book-intro">Book a free 30-min intro call</Link></li>
+                    <li><Link className="dropdown-item" to="/contact">Contact us</Link></li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
@@ -82,6 +94,8 @@ function App() {
           <Route path="/mvv" element={<MVV />} />
           <Route path="/expertise" element={<Expertise />} />
           <Route path="/book" element={<Booking />} />
+          <Route path="/book-hourly" element={<BookHourly />} />
+          <Route path="/book-intro" element={<BookIntro />} /> {/* Add the new route here */}
         </Routes>
       </div>
     </Router>

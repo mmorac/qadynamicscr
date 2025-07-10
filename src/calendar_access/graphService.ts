@@ -70,13 +70,13 @@ export async function createCalendarEvent(
 
 export async function getAvailableHours(
   date: Date,
+  sessionType: 'hour' | 'half-hour' = 'hour',
 ): Promise<string[]> {
   try {
     const accessToken = sessionStorage.getItem('accessToken');
     if (!accessToken) {
       throw new Error('The access token is not available.');
     }
-
 
     // Formatear el inicio y fin del día
     const startOfDay = new Date(date);
@@ -94,31 +94,36 @@ export async function getAvailableHours(
 
     let appointmentsList = appointments.data;
 
-    let busyHours: string[] = [];
+    let busySlots: string[] = [];
     if (appointmentsList && appointmentsList.length > 0) {
       appointmentsList.forEach((appointment: any) => {
         const start = new Date(appointment.horaInicio);
         const end = new Date(appointment.horaFinal);
-        const startHour = start.getHours();
-        const endHour = end.getHours();
-
-        // Agregar horas ocupadas al arreglo
-        for (let hour = startHour; hour < endHour; hour++) {
-          busyHours.push(`${hour}:00`);
-          if(end.getMinutes() > 0 && hour === endHour - 1) {
-            busyHours.push(`${hour + 1}:00`); // Si la cita termina en minutos, agregar la siguiente hora
-          }
+        let slotStart = start.getHours() + start.getMinutes() / 60;
+        let slotEnd = end.getHours() + end.getMinutes() / 60;
+        let increment = sessionType === 'half-hour' ? 0.5 : 1;
+        for (let t = slotStart; t < slotEnd; t += increment) {
+          let hour = Math.floor(t);
+          let min = (t % 1) === 0.5 ? '30' : '00';
+          busySlots.push(`${hour}:${min}`);
         }
       });
     }
-    
-    // Generar todas las horas posibles de 9:00 a 17:00
-    const allHours = Array.from({ length: 9 }, (_, i) => `${8 + i}:00`);
 
-    // Filtrar horas libres (0 = libre, 1 = ocupado, 2 = tentativo, 3 = fuera de horario)
-    const availableHours = allHours.filter(hour => !busyHours.includes(hour));
+    // Generar todos los slots posibles de 8:00 a 16:30 (excluyendo 17:00)
+    let allSlots: string[] = [];
+    if (sessionType === 'half-hour') {
+      for (let h = 8; h < 17; h++) {
+        allSlots.push(`${h}:00`);
+        if (h < 16) allSlots.push(`${h}:30`);
+      }
+    } else {
+      allSlots = Array.from({ length: 9 }, (_, i) => `${8 + i}:00`).filter(slot => slot !== '17:00');
+    }
 
-    return availableHours;
+    // Filtrar slots libres
+    const availableSlots = allSlots.filter(slot => !busySlots.includes(slot));
+    return availableSlots;
   } catch (error) {
     console.error('Error al obtener horas disponibles:', error);
     throw error;

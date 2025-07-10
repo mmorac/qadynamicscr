@@ -11,11 +11,22 @@ const Booking: React.FC = () => {
     const [company, setCompany] = useState(() => sessionStorage.getItem('company') || "");
     const [position, setPosition] = useState(() => sessionStorage.getItem('position') || "");
     const selectedHour = sessionStorage.getItem("selectedHour") || "";
+    const sessionType = sessionStorage.getItem('sessionType') || 'hour';
     const endTime = (() => {
         const [hour, minute] = selectedHour.split(":");
         if (!hour) return "";
-        const newHour = String(Number(hour) + 1).padStart(2, "0");
-        return `${newHour}:${minute || "00"}`;
+        let endHour = Number(hour);
+        let endMinute = Number(minute || "0");
+        if (sessionType === 'half-hour') {
+            endMinute += 30;
+            if (endMinute >= 60) {
+                endHour += 1;
+                endMinute -= 60;
+            }
+        } else {
+            endHour += 1;
+        }
+        return `${String(endHour).padStart(2, "0")}:${String(endMinute).padStart(2, "0")}`;
     })();
     sessionStorage.setItem("selectedEndTime", endTime);
     return (
@@ -38,7 +49,7 @@ const Booking: React.FC = () => {
             </div>
             <div className="booking-label">
                 <label>
-                    Name:
+                    First Name:
                     <input
                         type="text"
                         value={firstName}
@@ -53,7 +64,7 @@ const Booking: React.FC = () => {
             </div>
             <div className="booking-label">
                 <label>
-                    Email Address:
+                    Email:
                     <input
                         type="email"
                         value={email}
@@ -85,7 +96,7 @@ const Booking: React.FC = () => {
                 <label>
                     Telephone Number:
                     <input
-                        type="number"
+                        type="text"
                         value={telephoneNumber}
                         onChange={e => {
                             setTelephoneNumber(e.target.value);
@@ -107,7 +118,7 @@ const Booking: React.FC = () => {
                             sessionStorage.setItem('company', e.target.value);
                         }}
                         className="booking-input"
-                        placeholder="Company Name:"
+                        placeholder="Enter your company"
                     />
                 </label>
             </div>
@@ -122,50 +133,20 @@ const Booking: React.FC = () => {
                             sessionStorage.setItem('position', e.target.value);
                         }}
                         className="booking-input"
-                        placeholder="Position:"
+                        placeholder="Enter your position"
                     />
                 </label>
             </div>
             <div className="booking-detail">
-                <strong>Date:</strong> {
-                    (() => {
-                        const dateStr = sessionStorage.getItem("selectedDate");
-                        if (!dateStr) return "Not selected";
-                        const date = new Date(dateStr);
-                        if (isNaN(date.getTime())) return "Not selected";
-                        const mm = String(date.getMonth() + 1).padStart(2, "0");
-                        const dd = String(date.getDate()).padStart(2, "0");
-                        const yyyy = date.getFullYear();
-                        const result = `${mm}-${dd}-${yyyy}`;
-                        return result;
-                    })()
-                }
+                <strong>Selected Date:</strong> {sessionStorage.getItem('selectedDate') ? new Date(sessionStorage.getItem('selectedDate')!).toLocaleDateString('en-US') : 'None'}<br />
+                <strong>Session starts:</strong> {selectedHour}<br />
+                <strong>Session ends:</strong> {sessionStorage.getItem('selectedEndTime') || ''}
             </div>
-            <div className="booking-detail">
-                <strong>Start Time:</strong> {sessionStorage.getItem("selectedHour") || "Not selected"}
-            </div>
-            <div className="booking-detail">
-                <strong>End Time:</strong> {sessionStorage.getItem("selectedEndTime") || "Not selected"}
-            </div>
-            <div className="booking-actions">
-                <button
-                    className="booking-button"
-                    onClick={() => {
-                        bookTime(sessionStorage.getItem('email') || '', 
-                    sessionStorage.getItem('lastName') || '',
-                    sessionStorage.getItem('firstName') || '',
-                    sessionStorage.getItem('idNumber') || '',
-                    sessionStorage.getItem('telephoneNumber') || '',
-                    sessionStorage.getItem('company') || '',
-                    sessionStorage.getItem('position') || '')
-                    }}
-                >
-                    Confirm Booking
-                </button>
-            </div>
+            <button className="booking-button" onClick={() => bookTime(email, lastName, firstName, idNumber, telephoneNumber, company, position)}>
+                Book Now
+            </button>
         </div>
     );
 };
 
 export default Booking;
-export {};
