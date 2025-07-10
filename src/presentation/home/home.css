@@ -9,13 +9,20 @@
 
 .calendar-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 16px;
     margin-bottom: 8px;
 }
 
 .calendar-title {
-    margin: 0;
+    margin: 0 12px;
+    flex: 0 1 auto;
+}
+
+.calendar-header button {
+    flex: 0 0 auto;
+    margin: 0 4px;
 }
 
 .calendar-grid {
@@ -54,3 +61,38 @@
     cursor: pointer;
     width: 100%;
 }
+
+@media (max-width: 600px) {
+  .calendar {
+    width: 100vw;
+    max-width: 120vw;
+    min-width: 0;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    padding: 8px;
+  }
+  .calendar-header {
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+  }
+  .calendar-title {
+    font-size: 1rem;
+    margin: 0 8px;
+  }
+  .calendar-header button {
+    font-size: 1rem;
+    margin: 0 2px;
+  }
+  .calendar-grid, .available-hours-grid {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.95rem;
+  }
+  .calendar-day-btn, .available-hour-btn {
+    font-size: 0.95rem;
+    padding: 6px 8px;
+  }
+}
+
