@@ -15,11 +15,15 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, sessionType = 'hour' 
   });
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (selectedDate) {
-      getAvailableHours(selectedDate, sessionType).then(setAvailableSlots);
+      setLoadingSlots(true);
+      getAvailableHours(selectedDate, sessionType)
+        .then(setAvailableSlots)
+        .finally(() => setLoadingSlots(false));
     } else {
       setAvailableSlots([]);
     }
@@ -88,7 +92,9 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, sessionType = 'hour' 
       {/* Available slots below the calendar */}
       {selectedDate && (
         <div className="available-hours-grid">
-          {availableSlots.length > 0 ? (
+          {loadingSlots ? (
+            <div className="loader-container"><div className="loader"></div><p>Loading slots...</p></div>
+          ) : availableSlots.length > 0 ? (
             availableSlots.map(slot => (
               <button key={slot} className="available-hour-btn" onClick={() => handleSlotClick(slot)}>{slot}</button>
             ))
