@@ -113,12 +113,14 @@ export async function getAvailableHours(
     // Generar todos los slots posibles de 8:00 a 16:30 (excluyendo 17:00)
     let allSlots: string[] = [];
     if (sessionType === 'half-hour') {
-      for (let h = 8; h < 17; h++) {
-        allSlots.push(`${h}:00`);
-        if (h < 16) allSlots.push(`${h}:30`);
+      for (let h = 0; h <= 22; h++) {
+        allSlots.push(`${h.toString().padStart(2, '0')}:00`);
+        allSlots.push(`${h.toString().padStart(2, '0')}:30`);
       }
+      // Add the last slot for 23:00
+      allSlots.push('23:00');
     } else {
-      allSlots = Array.from({ length: 9 }, (_, i) => `${8 + i}:00`).filter(slot => slot !== '17:00');
+      allSlots = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
     }
 
     // Filtrar slots libres
