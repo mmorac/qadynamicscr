@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './home.css';
 
 const Home: React.FC = () => {
@@ -13,12 +14,12 @@ const Home: React.FC = () => {
         <div className="home-fb-card">
           <h2>Book an Introduction Call</h2>
           <p>Schedule an initial session with our experts.</p>
-          <a href="/book-intro" className="home-fb-btn">Book Now</a>
+          <Link to="/book-intro" className="home-fb-btn">Book Now</Link>
         </div>
         <div className="home-fb-card">
           <h2>Our Expertise</h2>
           <p>Discover our experience in quality management and business solutions.</p>
-          <a href="/expertise" className="home-fb-btn">Learn More</a>
+          <Link to="/expertise" className="home-fb-btn">Learn More</Link>
         </div>
       </section>
     </div>
