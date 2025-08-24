@@ -1,3 +1,8 @@
+/* Apply a linear gradient background to the entire application */
+body, #root, .App {
+  background: linear-gradient(120deg, #999999 0%, #cccccc 100%) !important;
+}
+
 /* Calendar container */
 .calendar {
     border: 1px solid #ccc;
@@ -76,6 +81,10 @@
     width: 50%;
     margin: 0 auto;
     display: block;
+}
+
+.calendar, .calendar-header, .calendar-title, .calendar-day-header, .calendar-day-btn, .available-hours-grid, .available-hour-btn {
+  color: rgb(48, 148, 132) !important;
 }
 
 @media (max-width: 600px) {

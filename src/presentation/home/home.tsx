@@ -3,9 +3,25 @@ import './home.css';
 
 const Home: React.FC = () => {
   return (
-    <div className="informative" style={{ width: '100%' }}>
-      <h2>Welcome to the Home Page</h2>
-      {/* Add your home page content here. No calendar should be shown. */}
+    <div className="home-fb-bg">
+      <header className="home-fb-header">
+        <img src="/img/logo_inicio.png" alt="QADynamicsCR Logo" className="home-fb-logo" />
+        <h1 className="home-fb-title">QADynamicsCR</h1>
+        <p className="home-fb-subtitle">Quality, Consultancy & Training for Your Business</p>
+        <a href="/services" className="home-fb-cta">Explore Our Services</a>
+      </header>
+      <section className="home-fb-section">
+        <div className="home-fb-card">
+          <h2>Book an Introduction Call</h2>
+          <p>Schedule an initial session with our experts.</p>
+          <a href="/book-intro" className="home-fb-btn">Book Now</a>
+        </div>
+        <div className="home-fb-card">
+          <h2>Our Expertise</h2>
+          <p>Discover our experience in quality management and business solutions.</p>
+          <a href="/expertise" className="home-fb-btn">Learn More</a>
+        </div>
+      </section>
     </div>
   );
 };

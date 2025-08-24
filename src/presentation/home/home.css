@@ -7,3 +7,206 @@
   padding: 24px 0;
 }
 
+/* Modern home page styles */
+.home-modern {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #30b484 0%, #8d8d8d 100%);
+}
+
+.home-content {
+  background: rgba(255,255,255,0.95);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(48,148,132,0.15);
+  padding: 40px 32px;
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+}
+
+.home-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #309484;
+  margin-bottom: 18px;
+}
+
+.home-description {
+  font-size: 1.15rem;
+  color: #333;
+  margin-bottom: 28px;
+}
+
+.home-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.home-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(48,148,132,0.12);
+  object-fit: cover;
+  background: #fff;
+}
+
+/* FitnessBlender-inspired home page styles */
+.home-fb-bg {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #999999 0%, #cccccc 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-fb-header {
+  text-align: center;
+  padding: 60px 20px 40px 20px;
+}
+
+.home-fb-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(48,148,132,0.12);
+  object-fit: cover;
+  background: #fff;
+  margin-bottom: 18px;
+}
+
+.home-fb-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #309484;
+  margin-bottom: 10px;
+}
+
+.home-fb-subtitle {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.home-fb-cta {
+  display: inline-block;
+  background: #309484;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 24px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(48,148,132,0.10);
+  transition: background 0.2s;
+}
+.home-fb-cta:hover {
+  background: #207a66;
+}
+
+.home-fb-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  padding: 20px 0 60px 0;
+}
+
+.home-fb-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(48,148,132,0.10);
+  padding: 32px 28px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-fb-card h2 {
+  font-size: 1.4rem;
+  color: #309484;
+  margin-bottom: 12px;
+}
+
+.home-fb-card p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 18px;
+}
+
+.home-fb-btn {
+  display: inline-block;
+  background: #309484;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 18px;
+  text-decoration: none;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(48,148,132,0.10);
+  transition: background 0.2s;
+}
+.home-fb-btn:hover {
+  background: #30b484;
+}
+
+/* Expertise card styles */
+.expertise-card {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 32px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(48,148,132,0.10);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: rgb(48, 148, 132);
+}
+
+.expertise-card h2 {
+  font-size: 1.7rem;
+  color: #309484;
+  margin-bottom: 18px;
+  text-align: center;
+  width: 100%;
+}
+
+.expertise-card p {
+  font-size: 1.08rem;
+  color: rgb(48, 148, 132);
+  margin-bottom: 16px;
+  text-align: justify;
+}
+
+.expertise-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(48,148,132,0.12);
+  background: #fff;
+  display: block;
+  margin: 0 auto 18px auto;
+}
+
+@media (max-width: 700px) {
+  .home-fb-section {
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 0 40px 0;
+  }
+  .home-fb-header {
+    padding: 40px 10px 24px 10px;
+  }
+}
+

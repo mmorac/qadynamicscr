@@ -1,4 +1,8 @@
 /* Booking page styles */
+body, #root, .App {
+  background: linear-gradient(120deg, #999999 0%, #cccccc 100%) !important;
+}
+
 .booking-container {
     padding-top: 2%;
     color: rgb(48, 148, 132);
