@@ -62,25 +62,33 @@ body, #root, .App {
 }
 
 .available-hours-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    row-gap: 10px;
-    width: 100%;
-    margin-top: 24px;
-    margin-bottom: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  row-gap: 14px;
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  box-sizing: border-box;
 }
 
 .available-hour-btn {
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid rgb(48, 148, 132);
-    background: #e7f8f5;
-    color: rgb(48, 148, 132);
-    cursor: pointer;
-    width: 50%;
-    margin: 0 auto;
-    display: block;
+  padding: 12px 18px;
+  border-radius: 4px;
+  border: 1px solid rgb(48, 148, 132);
+  background: #e7f8f5;
+  color: rgb(48, 148, 132);
+  cursor: pointer;
+  width: 100%;
+  margin: 0;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.1rem;
+  box-sizing: border-box;
 }
 
 .calendar, .calendar-header, .calendar-title, .calendar-day-header, .calendar-day-btn, .available-hours-grid, .available-hour-btn {
@@ -109,5 +117,18 @@ body, #root, .App {
   .calendar-header button {
     font-size: 1rem;
     margin: 0 2px;
+  }
+}
+
+@media (max-width: 700px) {
+  .available-hours-grid {
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 6px;
+    row-gap: 8px;
+    padding: 0 4px;
+  }
+  .available-hour-btn {
+    font-size: 0.95rem;
+    padding: 8px 6px;
   }
 }

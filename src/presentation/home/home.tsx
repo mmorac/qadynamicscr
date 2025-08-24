@@ -6,9 +6,8 @@ const Home: React.FC = () => {
     <div className="home-fb-bg">
       <header className="home-fb-header">
         <img src="/img/logo_inicio.png" alt="QADynamicsCR Logo" className="home-fb-logo" />
-        <h1 className="home-fb-title">QADynamicsCR</h1>
+        <h1 className="home-fb-title">QA Dynamics CR</h1>
         <p className="home-fb-subtitle">Quality, Consultancy & Training for Your Business</p>
-        <a href="/services" className="home-fb-cta">Explore Our Services</a>
       </header>
       <section className="home-fb-section">
         <div className="home-fb-card">
