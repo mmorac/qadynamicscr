@@ -1,3 +1,83 @@
+.contact-center-container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Contact card styles */
+.contact-card {
+  max-width: 400px;
+  width: 100%;
+  color: #309484;
+}
+.contact-email-link {
+  color: #309484;
+  text-decoration: none;
+}
+.contact-email-icon {
+  font-size: 22px;
+  color: #309484;
+  margin-right: 8px;
+}
+.contact-social-icon {
+  font-size: 32px;
+  color: #309484;
+}
+/* Social media button styles from W3Schools */
+.social-btn {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(48,148,132,0.10);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.social-btn:hover {
+  background: #e0f7f4;
+  box-shadow: 0 4px 16px rgba(48,148,132,0.18);
+}
+.social-linkedin svg {
+  fill: #309484;
+}
+.social-facebook svg {
+  fill: #309484;
+}
+.social-instagram svg {
+  fill: #309484;
+}
+.colored-icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  filter: invert(41%) sepia(63%) saturate(453%) hue-rotate(137deg) brightness(92%) contrast(92%);
+  transition: filter 0.2s;
+}
+
+.social-icon-wrapper:hover .colored-icon {
+  filter: invert(41%) sepia(63%) saturate(453%) hue-rotate(137deg) brightness(70%) contrast(120%);
+}
+/* Social icon overlay styles */
+.social-icon-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(749%) hue-rotate(176deg) brightness(97%) contrast(101%);
+  transition: filter 0.2s;
+}
+
+.social-icon-wrapper:hover .social-icon {
+  filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(749%) hue-rotate(176deg) brightness(120%) contrast(120%);
+}
 body {
   background: #eeeeee;
 }
