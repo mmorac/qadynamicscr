@@ -1,6 +1,31 @@
+/* Slot buttons in rows of two, max 80% width */
+.available-hours-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 80%;
+  margin: 24px auto 0 auto;
+}
+
+.available-hour-btn {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 12px 0;
+  font-size: 1rem;
+  border-radius: 12px;
+  background: #309484;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.available-hour-btn:hover {
+  background: #207a66;
+}
 /* Apply a linear gradient background to the entire application */
 body, #root, .App {
-  background: linear-gradient(120deg, #999999 0%, #cccccc 100%) !important;
+  background: linear-gradient(120deg, #999999 0%, #cccccc 100%);
 }
 
 /* Calendar container */
@@ -61,16 +86,9 @@ body, #root, .App {
     cursor: pointer;
 }
 
-.available-hours-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 12px;
-  row-gap: 14px;
-  width: 100%;
-  margin-top: 24px;
-  margin-bottom: 8px;
-  box-sizing: border-box;
-}
+
+/* Card styles should be set in their respective CSS files. Remove conflicting backgrounds here. */
+
 
 .available-hour-btn {
   padding: 12px 18px;
@@ -91,8 +109,9 @@ body, #root, .App {
   box-sizing: border-box;
 }
 
-.calendar, .calendar-header, .calendar-title, .calendar-day-header, .calendar-day-btn, .available-hours-grid, .available-hour-btn {
-  color: rgb(48, 148, 132) !important;
+.home-fb-card,
+.expertise-card {
+  background: linear-gradient(120deg, #cccccc 0%, #dddddd 100%);
 }
 
 @media (max-width: 600px) {

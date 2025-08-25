@@ -1,6 +1,17 @@
-body, #root, .App {
-  background: linear-gradient(120deg, #999999 0%, #cccccc 100%) !important;
+/* Cards with both home-fb-card and expertise-card classes get a gradient background */
+.home-fb-card.expertise-card {
+  background: linear-gradient(120deg, #cccccc 0%, #eeeeee 100%);
 }
+body, #root, .App {
+  background: #eeeeee !important;
+}
+
+
+.home-fb-card,
+.expertise-card {
+  background: linear-gradient(120deg, #dddddd 0%, #eeeeee 100%);
+}
+
 
 .App {
   text-align: center;

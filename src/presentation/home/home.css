@@ -1,3 +1,6 @@
+body {
+  background: #eeeeee;
+}
 /* Remove calendar styles from this file. Styles are now in calendar.css */
 .informative {
   width: 100%;
@@ -13,7 +16,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #30b484 0%, #8d8d8d 100%);
 }
 
 .home-content {
@@ -58,7 +60,7 @@
 /* FitnessBlender-inspired home page styles */
 .home-fb-bg {
   min-height: 100vh;
-  background: linear-gradient(120deg, #999999 0%, #cccccc 100%);
+  background: #eeeeee;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,7 +119,7 @@
 }
 
 .home-fb-card {
-  background: #fff;
+  background: linear-gradient(120deg, #dddddd 0%, #eeeeee 100%);
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(48,148,132,0.10);
   padding: 32px 28px;
@@ -163,7 +165,7 @@
   width: 100%;
   margin: 0 auto;
   padding: 40px 32px;
-  background: #fff;
+  background: linear-gradient(120deg, #cccccc 0%, #dddddd 100%);
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(48,148,132,0.10);
   text-align: left;
